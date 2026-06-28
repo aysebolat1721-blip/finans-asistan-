@@ -1,0 +1,19 @@
+# API anahtarları ve gizli dosyalar - ASLA GitHub'a gönderilmez!
+.env
+
+# Python sanal ortamı
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Streamlit cache
+.streamlit/
+
+# macOS sistem dosyaları
+.DS_Store
+
+# IDE dosyaları
+.idea/
+.vscode/
