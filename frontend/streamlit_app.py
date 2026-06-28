@@ -18,6 +18,16 @@ root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if root_dir not in sys.path:
     sys.path.append(root_dir)
 
+# Streamlit Cloud Secrets Desteği
+# Streamlit Cloud'da .env dosyası olmadığı için API anahtarlarını st.secrets'tan okuyoruz
+try:
+    if "GEMINI_API_KEY" in st.secrets:
+        os.environ["GEMINI_API_KEY"] = st.secrets["GEMINI_API_KEY"]
+    if "GROQ_API_KEY" in st.secrets:
+        os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+except Exception:
+    pass  # Yerel çalışmada secrets olmayabilir, .env kullanılır
+
 # Sayfa Yapılandırması
 st.set_page_config(
     page_title="AI Kişisel Finans Asistanı",
@@ -137,7 +147,7 @@ with st.sidebar:
     # Çalışma Modu Seçimi
     run_mode = st.radio(
         "🖥️ Çalışma Modu",
-        ["FastAPI Backend", "Doğrudan Ajan (Direct Mode)"],
+        ["Doğrudan Ajan (Direct Mode)", "FastAPI Backend"],
         help="FastAPI backend üzerinden veya doğrudan Streamlit içerisinden analiz yapar."
     )
     
